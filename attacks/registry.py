@@ -12,14 +12,33 @@ from __future__ import annotations
 from typing import Any, Callable
 
 from attacks.base import Attack, AttackConfig
+from attacks.prompt_based.autodan_ga import AutoDANGAAttack
+from attacks.prompt_based.autodan_hga import AutoDANHGAAttack
+from attacks.prompt_based.best_of_n import BestOfNAttack
+from attacks.prompt_based.cipher import CipherAttack
+from attacks.prompt_based.crescendo import CrescendoAttack
+from attacks.prompt_based.deep_inception import DeepInceptionAttack
+from attacks.prompt_based.gptfuzzer import GPTFuzzerAttack
+from attacks.prompt_based.many_shot import ManyShotJailbreakAttack
+from attacks.prompt_based.pair import PAIRAttack
+from attacks.prompt_based.tap import TAPAttack
 from models.loader import LoadedModel, load_model
 
 ATTACK_REGISTRY: dict[str, Callable[..., Attack]] = {
-    # Populated incrementally by each attack-implementing agent as it lands, e.g.:
+    # Populated incrementally by each attack-implementing agent as it lands.
     #   "gcg": attacks.gradient_based.gcg.GCGAttack,
-    #   "autodan_ga": attacks.prompt_based.autodan_ga.AutoDANGAAttack,
     #   "refusal_ablation": attacks.representation_based.refusal_ablation.RefusalAblationAttack,
     #   "lora_finetune": attacks.weight_tampering.lora_finetune.LoRAFinetuneAttack,
+    "autodan_ga": AutoDANGAAttack,
+    "autodan_hga": AutoDANHGAAttack,
+    "many_shot": ManyShotJailbreakAttack,
+    "best_of_n": BestOfNAttack,
+    "pair": PAIRAttack,
+    "tap": TAPAttack,
+    "crescendo": CrescendoAttack,
+    "deep_inception": DeepInceptionAttack,
+    "cipher": CipherAttack,
+    "gptfuzzer": GPTFuzzerAttack,
 }
 
 
